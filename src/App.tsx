@@ -1,12 +1,11 @@
 import "./App.css";
-import MainSection from "./component/MainSection";
-import Navbar from "./component/Navbar";
+
+import MainLayout from "./layout/Main.Layout";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <MainSection />
+      <MainLayout />
     </>
   );
 }
