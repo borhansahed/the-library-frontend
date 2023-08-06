@@ -5,11 +5,15 @@ import Footer from "../component/Footer";
 export default function MainLayout() {
   return (
     <>
-      <main className="px-[200px]">
+      <main
+        style={{
+          minHeight: "calc(100vh - 250px)",
+        }}
+        className="px-[200px] "
+      >
         <Navbar />
         <Outlet />
       </main>
-
       <Footer />
     </>
   );

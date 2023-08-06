@@ -21,7 +21,9 @@ export default function Navbar() {
               <li className="text-blue-700 font-bold">Login</li>
             </Link>
             <Link to="/signup">
-              <li className="text-blue-700 font-bold">Signup</li>
+              <li className="border hover:bg-white hover:border-blue-700 hover:text-blue-700 bg-blue-700 border-white text-sm font-bold text-white px-4 py-1 m-auto rounded-full">
+                Signup
+              </li>
             </Link>
           </ul>
         </div>
