@@ -1,4 +1,4 @@
-import FormInput from "./formInput";
+import FormInput from "./FormInput";
 import FormFooter from "./FormFooter";
 import FormButton from "./FormButton";
 

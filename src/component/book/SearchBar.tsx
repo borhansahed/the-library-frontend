@@ -8,9 +8,9 @@ export default function SearchBar() {
           <GoSearch />
         </p>
         <input
-          width={200}
           className="focus:outline-none pl-2"
           type="text"
+          size={40}
           placeholder="search your book"
         />
       </div>

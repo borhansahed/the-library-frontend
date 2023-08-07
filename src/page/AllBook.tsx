@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Book from "../component/Book";
 import SearchBar from "../component/book/SearchBar";
 import { useGetBooksQuery } from "../redux/api/book.api";
@@ -15,7 +16,14 @@ export default function AllBook() {
         <div className="flex items-center justify-between mt-10 px-8">
           <div>filter</div>
           <SearchBar />
-          <div>add new Book</div>
+          <div>
+            <Link
+              className="w-20 bg-blue-700 text-white px-4 py-2.5 rounded-xl font-bold"
+              to={"/addBook"}
+            >
+              Add New Book
+            </Link>
+          </div>
         </div>
 
         <div className="flex justify-center flex-wrap items-center gap-7 mt-14">
