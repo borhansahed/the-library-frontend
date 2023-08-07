@@ -9,14 +9,17 @@ export default function AllBook() {
   return (
     <>
       <section className="my-24">
-        <h1 className="text-3xl text-center font-bold pr-10 text-blue-700">
+        <h1 className="text-3xl text-center font-bold  text-blue-700">
           All Books
         </h1>
 
-        <div className="flex items-center justify-between mt-10 px-8">
-          <div>filter</div>
-          <SearchBar />
-          <div>
+        <div className="flex items-center  justify-between  mt-10  ">
+          <div className=" ">filter</div>
+          <div className="ml-24">
+            <SearchBar />
+          </div>
+
+          <div className="">
             <Link
               className="w-20 bg-blue-700 text-white px-4 py-2.5 rounded-xl font-bold"
               to={"/addBook"}
