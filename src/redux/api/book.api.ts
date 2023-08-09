@@ -3,7 +3,7 @@ export const bookApi = createApi({
   reducerPath: "bookApi",
   tagTypes: ["reviews", "books", "updateBook"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/v1/book",
+    baseUrl: "https://the-library-llca.onrender.com/api/v1/book",
   }),
   endpoints: (builder) => ({
     getLatestBook: builder.query({

@@ -23,7 +23,7 @@ export default function Book({ book }: IProps) {
             <h1 className="text-2xl text-blue-700">{book.title}</h1>
             <p>{book.author}</p>
             <p>{book.genre}</p>
-            <p>{book.publicationDate}</p>
+            <p>{book.year}</p>
             <Link to={`/allBook/${book._id}`}>
               {" "}
               <button className="border hover:bg-white hover:border-blue-700 hover:text-blue-700 bg-blue-700 text-sm font-bold text-white px-4 py-2 w-full mt-3 rounded-full">
