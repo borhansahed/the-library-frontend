@@ -1,21 +1,23 @@
-import { useState } from "react";
-import FormButton from "../component/form/FormButton";
-import FormInput from "../component/form/FormInput";
+import { useNavigate, useParams } from "react-router-dom";
+import FormButton from "../form/FormButton";
 import { MdOutlineCancel } from "react-icons/md";
-import { usePostBookMutation } from "../redux/api/book.api";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { useState } from "react";
+import FormInput from "../form/FormInput";
+import BookGenre from "./BookGenre";
+import { useUpdateBookMutation } from "../../redux/api/book.api";
 
-import BookGenre from "../component/book/BookGenre";
+const EditBook = () => {
+  const { id } = useParams();
 
-const AddBook = () => {
   const navigate = useNavigate();
   const [inputData, setInputData] = useState<{
     [key in string]: string | File;
   }>({});
-  const [image, setImage] = useState<string | undefined>(undefined);
 
-  const [postBook] = usePostBookMutation(inputData);
+  const [image, setImage] = useState<string | undefined>(undefined);
+  const [updateBook, { isError, isLoading, isSuccess }] =
+    useUpdateBookMutation();
 
   const handleInputData = async (key: string, value: string | File) => {
     setInputData((prevInputData) => ({
@@ -47,26 +49,31 @@ const AddBook = () => {
     );
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     inputData.image = image!;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const error: any = await postBook(inputData);
 
-    if (error?.error?.originalStatus) {
-      return toast.error("Give valid value");
+    updateBook({ id, inputData });
+    // console.log(inputData);
+
+    if (isError) {
+      return toast.error("Put valid value");
     }
-    setInputData({});
-    setImage(undefined);
-
-    return navigate("/allBook");
   };
+
+  if (isSuccess) {
+    setTimeout(() => {
+      navigate(`/allBook/${id}`);
+    }, 1000);
+    toast.success("Successfully updated");
+  }
 
   return (
     <>
       <h1 className=" mt-20 text-center font-bold text-3xl text-blue-700">
-        Add Book
+        Edit Book
       </h1>
       <section className=" my-14 flex justify-center items-center">
         <form
@@ -135,12 +142,15 @@ const AddBook = () => {
               />
             </>
           )}
-
-          <FormButton />
+          {isLoading ? (
+            <p className="text-white">Loading...</p>
+          ) : (
+            <FormButton />
+          )}
         </form>
       </section>
     </>
   );
 };
 
-export default AddBook;
+export default EditBook;

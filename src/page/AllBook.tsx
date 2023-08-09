@@ -3,9 +3,26 @@ import Book from "../component/Book";
 import SearchBar from "../component/book/SearchBar";
 import { useGetBooksQuery } from "../redux/api/book.api";
 import { IBook } from "../types/book.type";
+import { useState } from "react";
 
 export default function AllBook() {
+  const [search, setSearch] = useState<string>("");
   const { data } = useGetBooksQuery(undefined);
+
+  const handleSearch = (value: string) => {
+    setSearch(value);
+  };
+
+  const filteredBook = search
+    ? data?.data?.filter((book: IBook) => {
+        return (
+          book?.genre.includes(search) ||
+          book.title.includes(search) ||
+          book?.author.includes(search)
+        );
+      })
+    : data?.data;
+  console.log(filteredBook);
   return (
     <>
       <section className="my-24">
@@ -16,7 +33,12 @@ export default function AllBook() {
         <div className="flex items-center  justify-between  mt-10  ">
           <div className=" ">filter</div>
           <div className="ml-24">
-            <SearchBar />
+            <SearchBar
+              onChange={(e: { target: { value: string } }) =>
+                handleSearch(e.target.value)
+              }
+              value={search}
+            />
           </div>
 
           <div className="">
@@ -30,7 +52,7 @@ export default function AllBook() {
         </div>
 
         <div className="flex justify-center flex-wrap items-center gap-7 mt-14">
-          {data?.data.map((book: IBook) => {
+          {filteredBook?.map((book: IBook) => {
             return <Book key={book._id} book={book} />;
           })}
         </div>

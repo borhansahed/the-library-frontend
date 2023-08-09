@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 const MainSection = () => {
   return (
     <>
@@ -15,9 +17,7 @@ const MainSection = () => {
           <button className="border border-blue-700 text-sm font-bold text-blue-700 py-2 px-5 rounded-full ">
             All Books
           </button>
-          <button className="border hover:bg-white hover:border-blue-700 hover:text-blue-700 bg-blue-700 border-white text-sm font-bold text-white py-2 px-5 rounded-full ">
-            <a href="#books"> Latest Books</a>
-          </button>
+          <Button buttonText={"Latest Books"} />
         </div>
       </main>
     </>

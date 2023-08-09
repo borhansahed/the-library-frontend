@@ -6,6 +6,8 @@ import Signup from "../page/Signup";
 import Home from "../page/Home";
 import AllBook from "../page/AllBook";
 import AddBook from "../page/AddBook";
+import BookDetails from "../component/book/BookDetails";
+import EditBook from "../component/book/EditBook";
 
 const routes = createBrowserRouter([
   {
@@ -14,11 +16,20 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "",
+        index: true,
         element: <Home />,
       },
       {
         path: "/allBook",
         element: <AllBook />,
+      },
+      {
+        path: "/allBook/:id",
+        element: <BookDetails />,
+      },
+      {
+        path: "/allBook/:id/editBook",
+        element: <EditBook />,
       },
       {
         path: "/addBook",

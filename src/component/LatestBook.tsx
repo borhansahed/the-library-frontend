@@ -1,10 +1,10 @@
-import { useGetBooksQuery } from "../redux/api/book.api";
+import { useGetLatestBookQuery } from "../redux/api/book.api";
 import { IBook } from "../types/book.type";
 
 import Book from "./Book";
 
 export default function LatestBook() {
-  const { data } = useGetBooksQuery(undefined);
+  const { data } = useGetLatestBookQuery(undefined);
 
   return (
     <>
