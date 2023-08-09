@@ -8,6 +8,7 @@ import AllBook from "../page/AllBook";
 import AddBook from "../page/AddBook";
 import BookDetails from "../component/book/BookDetails";
 import EditBook from "../component/book/EditBook";
+import Required from "../auth/Required";
 
 const routes = createBrowserRouter([
   {
@@ -25,7 +26,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/allBook/:id",
-        element: <BookDetails />,
+        element: (
+          <Required>
+            <BookDetails />
+          </Required>
+        ),
       },
       {
         path: "/allBook/:id/editBook",
