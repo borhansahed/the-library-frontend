@@ -12,6 +12,7 @@ const FormInput = ({
   value,
   placeholder,
   handleInputData,
+  ...rest
 }: IProps) => {
   return (
     <>
@@ -31,6 +32,8 @@ const FormInput = ({
         onChange={(e: { target: { value: string } }) =>
           handleInputData(labelText.toLowerCase(), e.target.value)
         }
+        required
+        {...rest}
       />
     </>
   );

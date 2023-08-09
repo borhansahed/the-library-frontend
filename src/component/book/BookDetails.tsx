@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   useDeleteBookMutation,
   useGetOneBookQuery,
@@ -7,14 +7,20 @@ import Button from "../Button";
 import Review from "./Review";
 import AddReview from "./AddReview";
 import Swal from "sweetalert2";
+import user from "../../auth/user";
+import { toast } from "react-hot-toast";
 
 const BookDetails = () => {
   const { id } = useParams();
   const { data } = useGetOneBookQuery(id);
   const [deleteBook] = useDeleteBookMutation();
   const navigate = useNavigate();
+  const verifiedUser = user();
 
   const handleDelete = () => {
+    if (verifiedUser.name !== data?.data?.author) {
+      return toast.error("Your are not Author of this book");
+    }
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -66,9 +72,19 @@ const BookDetails = () => {
             </p>
 
             <div className="mt-8 flex gap-3">
-              <Link to={`/allBook/${id}/editBook`}>
+              <button
+                onClick={() => {
+                  if (verifiedUser.name === data?.data.author) {
+                    toast.success("Your are  Author of this book");
+                    navigate(`/allBook/${id}/editBook`);
+                  } else {
+                    toast.error("Your are not Author of this book");
+                  }
+                }}
+              >
                 <Button buttonText={"Edit Book"} />
-              </Link>
+              </button>
+
               <button
                 onClick={handleDelete}
                 className="border hover:bg-white hover:border-blue-700 hover:text-blue-700 bg-red-700 border-white text-sm font-bold text-white py-2 px-5 rounded-full "
